@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/shortest-path-simulation/static/css/main.f14e96e6.css",
-    "main.js": "/shortest-path-simulation/static/js/main.e42838e7.js",
+    "main.js": "/shortest-path-simulation/static/js/main.3bd3e56c.js",
     "index.html": "/shortest-path-simulation/index.html",
     "main.f14e96e6.css.map": "/shortest-path-simulation/static/css/main.f14e96e6.css.map",
-    "main.e42838e7.js.map": "/shortest-path-simulation/static/js/main.e42838e7.js.map"
+    "main.3bd3e56c.js.map": "/shortest-path-simulation/static/js/main.3bd3e56c.js.map"
   },
   "entrypoints": [
     "static/css/main.f14e96e6.css",
-    "static/js/main.e42838e7.js"
+    "static/js/main.3bd3e56c.js"
   ]
 }
