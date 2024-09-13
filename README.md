@@ -1,70 +1,183 @@
-# Getting Started with Create React App
+# 🗺️ Shortest Path Simulation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Live Demo 🚀](https://shripad735.github.io/shortest-path-simulation/)
 
-## Available Scripts
+Welcome to the **Shortest Path Simulation** web app! This interactive React-based application allows you to explore and visualize the traversal of three popular pathfinding algorithms: **Breadth-First Search (BFS)**, **Depth-First Search (DFS)**, and **Dijkstra's Algorithm** on a fictional grid map.
 
-In the project directory, you can run:
+### 🎯 Key Features
+- 🗺️ **Interactive Map**: Users can select start and end locations on a grid representing a fictional city.
+- ⚙️ **Algorithm Selection**: Choose between BFS, DFS, or Dijkstra's Algorithm.
+- 👀 **Step-by-Step Visualization**: Watch the algorithms explore the grid in real-time, highlighting the nodes and paths.
+- 📊 **Algorithm Comparison**: Compare the efficiency of each algorithm in terms of steps taken and time complexity.
+- ✨ **Modern UI**: Built with React and styled using **Tailwind CSS** for a clean and responsive user experience.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 📽️ Live Demo
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+You can explore the live version of this project at: [Live Demo](https://shripad735.github.io/shortest-path-simulation/)
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🚀 Installation & Setup
 
-### `npm run build`
+To run the project locally:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Shripad735/shortest-path-simulation.git
+   cd shortest-path-simulation
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. **Start the development server**:
+   ```bash
+   npm start
+   ```
 
-### `npm run eject`
+4. Visit `http://localhost:3000` to see the app in action.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## ⚙️ Technologies Used
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **React**: For building the UI components and managing state.
+- **Tailwind CSS**: For modern and responsive styling.
+- **JavaScript**: Core language for algorithm implementation and functionality.
+- **HTML5 & CSS3**: Basic structure and style.
+- **React Hooks**: For managing state and side effects (e.g., `useState`, `useEffect`).
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 🔍 Pathfinding Algorithms
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This project implements three core algorithms that simulate pathfinding between two points on a grid. Here's a brief overview:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. **Breadth-First Search (BFS)**:
+   - A **queue-based** approach to explore all nodes at the current depth before moving deeper.
+   - **Time Complexity**: O(V + E) (where V = vertices, E = edges).
+   - Ensures finding the **shortest path** in an unweighted grid.
 
-### Code Splitting
+2. **Depth-First Search (DFS)**:
+   - A **stack-based** approach that explores as far as possible down a branch before backtracking.
+   - **Time Complexity**: O(V + E).
+   - Does not guarantee the shortest path, but explores more deeply first.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+3. **Dijkstra’s Algorithm**:
+   - A **priority queue-based** approach for finding the shortest path in weighted graphs.
+   - **Time Complexity**: O(E + V log V).
+   - Finds the shortest path even on weighted grids by evaluating the cost of each move.
 
-### Analyzing the Bundle Size
+### Data Structures Involved:
+- **Queue (BFS)**: To keep track of the current level of nodes to explore.
+- **Stack (DFS)**: For storing and backtracking through nodes.
+- **Priority Queue (Dijkstra)**: To ensure the lowest-cost node is always processed next.
+- **Set**: To store visited nodes and avoid revisiting them.
+- **Array**: For representing the grid, and maintaining the current path during exploration.
+- **Dictionary (Object)**: For storing node distances and previous nodes in Dijkstra's algorithm.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## 🧠 How It Works
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### BFS Example (from code):
+```js
+const bfs = async (start, end, setPath, setVisited) => {
+  const queue = [[start]];
+  const visitedSet = new Set();
 
-### Advanced Configuration
+  while (queue.length > 0) {
+    const path = queue.shift();
+    const node = path[path.length - 1];
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+    if (node.x === end.x && node.y === end.y) {
+      setPath(path);  // Shortest path found!
+      return;
+    }
 
-### Deployment
+    if (!visitedSet.has(`${node.x},${node.y}`)) {
+      visitedSet.add(`${node.x},${node.y}`);
+      setVisited(prevVisited => [...prevVisited, node]);
+      await delay(50);  // Slow down visualization for user engagement
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+      for (const neighbor of getNeighbors(node)) {
+        if (!visitedSet.has(`${neighbor.x},${neighbor.y}`)) {
+          queue.push([...path, neighbor]);
+        }
+      }
+    }
+  }
 
-### `npm run build` fails to minify
+  setPath([]);  // No path found
+};
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Dijkstra's Example:
+```js
+const dijkstra = async (start, end, setPath, setVisited) => {
+  const distances = {};
+  const previous = {};
+  const pq = new PriorityQueue();
+  const visitedSet = new Set();
+
+  // Initialize distances to Infinity and set start node distance to 0
+  for (let x = 0; x < gridSize; x++) {
+    for (let y = 0; y < gridSize; y++) {
+      distances[`${x},${y}`] = Infinity;
+    }
+  }
+  distances[`${start.x},${start.y}`] = 0;
+  pq.enqueue({ x: start.x, y: start.y }, 0);
+
+  while (!pq.isEmpty()) {
+    const { x, y } = pq.dequeue().element;
+    
+    if (x === end.x && y === end.y) {
+      const path = [];  // Trace the shortest path
+      let current = end;
+      while (current) {
+        path.unshift(current);
+        current = previous[`${current.x},${current.y}`];
+      }
+      setPath(path);  // Shortest path found!
+      return;
+    }
+
+    if (visitedSet.has(`${x},${y}`)) continue;
+    visitedSet.add(`${x},${y}`);
+    setVisited(prevVisited => [...prevVisited, { x, y }]);
+    await delay(50);
+
+    for (const neighbor of getNeighbors({ x, y })) {
+      const alt = distances[`${x},${y}`] + 1;
+      if (alt < distances[`${neighbor.x},${neighbor.y}`]) {
+        distances[`${neighbor.x},${neighbor.y}`] = alt;
+        previous[`${neighbor.x},${neighbor.y}`] = { x, y };
+        pq.enqueue(neighbor, alt);
+      }
+    }
+  }
+
+  setPath([]);  // No path found
+};
+```
+
+---
+
+## 🧑‍💻 Contribution
+
+We welcome contributions! Feel free to fork the repo, create feature branches, and submit pull requests. 
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License. Feel free to use, modify, and distribute as needed!
+
+---
+
+Thanks for checking out the project! 🎉 Let me know if you have any feedback or suggestions!
